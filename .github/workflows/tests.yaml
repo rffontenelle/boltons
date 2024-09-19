@@ -18,6 +18,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - {name: Linux, python: '3.13', os: ubuntu-latest, tox: py313}
+          - {name: Windows, python: '3.13', os: windows-latest, tox: py313}
+          - {name: Mac, python: '3.13', os: macos-latest, tox: py313}
           - {name: Linux, python: '3.12', os: ubuntu-latest, tox: py312}
           - {name: Windows, python: '3.12', os: windows-latest, tox: py312}
           - {name: Mac, python: '3.12', os: macos-latest, tox: py312}
@@ -32,6 +35,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+          allow-prereleases: true
       - name: update pip
         run: |
           pip install -U wheel
